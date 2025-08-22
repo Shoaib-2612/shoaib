@@ -1,23 +1,39 @@
-document.getElementById("signup-form").addEventListener("submit", function (e) {
-  const dob = new Date(document.getElementById("dob").value);
-  const today = new Date();
-  const age = today.getFullYear() - dob.getFullYear();
-  const month = today.getMonth() - dob.getMonth();
-  if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
-    age--;
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('signup-form');
+  if (!form) return;
 
-  if (age < 18) {
-    alert("You must be at least 18 years old to sign up.");
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    return;
-  }
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const dob = document.getElementById('dob').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
 
-  const password = document.getElementById("password").value;
-  const confirm = document.getElementById("confirm-password").value;
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
 
-  if (password !== confirm) {
-    alert("Passwords do not match.");
-    e.preventDefault();
-  }
+    try {
+      const res = await fetch('http://localhost:4000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name, email, phone, dob, password, confirmPassword })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Registration failed');
+        return;
+      }
+      window.location.href = 'signin.html';
+    } catch (err) {
+      alert('Network error');
+    }
+  });
 });
+
+
+
