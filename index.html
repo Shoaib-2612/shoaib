@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="image.png" type="image/png">
+  <title>co-x Interactive Frame</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #6da9e8;
+    }
+    h1{
+      text-align: center;    }
+
+    .frame {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #ffffff;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      margin: 40px auto;
+      padding: 20px;
+      max-width: 1000px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .part {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .part:hover {
+      background-color: #e0f0ff;
+    }
+
+    .link-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .link-button:hover {
+      background-color: #005fa3;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    p {
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+    }
+    .summary {
+  background: white;
+  border: 1px solid #007BFF; /* Reduced from 2px to 1px */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+    p {
+      margin: 10px 0;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+    .log{
+      text-align: right;
+    }
+      .frame1 {
+      border: 2px solid #333;
+      padding: 10px;
+      width: 500px;
+      height: 300px;
+      position: relative;
+    }
+
+    .frame1 img {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 150px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>co-x</h1>
+  <div class="log">
+    <div class="button-container">
+        <a href="signin.html" class="link-button">logout</a>
+      </div>
+  </div>
+    <div class="frame">
+
+    <div class="part" onclick="toggleOptions(this)">
+        <div class="button-container">
+        <a href="index.html" class="link-button">home</a>
+      </div>
+    </div>
+
+
+    <div class="part" onclick="toggleOptions(this)">
+       <div class="button-container">
+        <a href="frame.html" class="link-button">register</a>
+      </div>
+    </div>
+
+    <div class="part" onclick="toggleOptions(this)">
+      <div class="button-container">
+        <div class="option">
+          <select>
+            <option value="auto">contant us</option>
+            <option value="auto">example@gmail.com</option>
+            <option value="auto">546xxxxxxx</option>
+          </select>
+          </div>
+    </div>
+      </div>
+    <div class="part" onclick="toggleOptions(this)">
+        <p>about us</p>
+</div>
+</div>
+  <div class="summary">
+    <div class="frame1">
+    <h2>Investment Summary</h2>
+    <p><span class="label">Name:shoaib</span> <span id="name"></span></p>
+    <p><span class="label">Phone:12xxxxxxx</span> <span id="phone"></span></p>
+    <p><span class="label">Email:example@gmail.com</span> <span id="email"></span></p>
+    <p><span class="label">Product:xyz</span> <span id="product"></span></p>
+    <p><span class="label">Amount:10000</span> ₹<span id="amount"></span></p>
+    <p><span class="label">Description:abc</span><br><span id="description"></span></p>
+    <a href="https://th.bing.com/th/id/OIP.cFTg_bPIeuuUNWuZ8R3uWAHaFj?w=231&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3">
+        <img src="https://th.bing.com/th/id/OIP.cFTg_bPIeuuUNWuZ8R3uWAHaFj?w=231&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/image.png" alt="example">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("message", function(event) {
+      const data = event.data;
+      document.getElementById("name").textContent = data.name;
+      document.getElementById("phone").textContent = data.phone;
+      document.getElementById("email").textContent = data.email;
+      document.getElementById("product").textContent = data.product;
+      document.getElementById("amount").textContent = data.amount;
+      document.getElementById("description").textContent = data.description;
+    });
+  </script>
+
+
+
+</body>
+</html>

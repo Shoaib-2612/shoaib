@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form to Frame</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .form-section, .frame-section {
+      flex: 1;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .form-section {
+      background-color: #f0f4f8;
+      border-right: 2px solid #ccc;
+    }
+
+    .frame-section {
+      background-color: #ffffff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Half: Form -->
+  <div class="form-section">
+    <h2>Project Investment Form</h2>
+    <form id="investmentForm" onsubmit="sendToFrame(); return false;">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="product" placeholder="Product Name" required />
+      <input type="number" name="amount" placeholder="Investment Amount" required />
+      <textarea name="description" placeholder="Project Description" rows="4" required></textarea>
+       <button type="submit" class="link-button" onclick="location.href='index.html'">sign up</button>
+    </form>
+  </div>
+
+  <!-- Right Half: Frame -->
+  <div class="frame-section">
+    <iframe id="outputFrame" src="frame.html"></iframe>
+  </div>
+
+  <script>
+    function sendToFrame() {
+      const form = document.getElementById("investmentForm");
+      const data = {
+        name: form.name.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        product: form.product.value,
+        amount: form.amount.value,
+        description: form.description.value
+      };
+
+      const frame = document.getElementById("outputFrame").contentWindow;
+      frame.postMessage(data, "*");
+    }
+  </script>
+
+</body>
+</html>
